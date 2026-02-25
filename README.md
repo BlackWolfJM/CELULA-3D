@@ -1,6 +1,6 @@
 # 🔬 Célula Animal 3D — Visualizador Científico Interactivo
 
-![Célula Animal 3D](C:\Users\cueva\.gemini\antigravity\brain\2e7ff8e2-133f-450f-9642-79237337c9d7\celula_3d_render_1771978087366.png)
+![Célula Animal 3D](./public/cell-render.png)
 
 Un proyecto personal que construí para explorar cómo llevar la biología celular al navegador usando tecnología 3D en tiempo real. La idea surgió de querer entender mejor cómo funciona una célula animal y, al mismo tiempo, practicar con React Three Fiber y Three.js.
 
