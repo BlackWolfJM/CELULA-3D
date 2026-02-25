@@ -23,14 +23,14 @@ export const CameraController = () => {
         const isAnimating = (time - animationStartTime.current) < IS_ANIMATING_DURATION
 
         if (selectedOrganelle && cameraTarget) {
-            // Soft damp the target to keep it centered
-            easing.damp3(state.controls ? (state.controls as any).target : new THREE.Vector3(), cameraTarget, 0.25, delta)
+            // Soft damp the target to allow some manual movement while keeping it centered
+            easing.damp3(state.controls ? (state.controls as any).target : new THREE.Vector3(), cameraTarget, 0.3, delta)
 
             if (isAnimating) {
-                // Position camera close to and slightly above/in-front of the organelle
-                const offset = new THREE.Vector3(0.5, 0.8, 2.5)
+                const offset = new THREE.Vector3(0, 0, 3)
                 const targetPos = cameraTarget.clone().add(offset)
-                easing.damp3(state.camera.position, targetPos, 0.3, delta)
+                // Smooth transition to organelle
+                easing.damp3(state.camera.position, targetPos, 0.35, delta)
             }
         } else if (!selectedOrganelle && isAnimating) {
             // Return to default view ONLY during transition back

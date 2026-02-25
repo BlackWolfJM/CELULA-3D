@@ -34,7 +34,7 @@ export const Scene = () => {
             <OrbitControls
                 enablePan={true}
                 enableZoom={true}
-                minDistance={0.3}
+                minDistance={1}
                 maxDistance={25}
                 makeDefault
                 enableDamping={true}
@@ -55,7 +55,6 @@ export const Scene = () => {
                             <meshBasicMaterial color="black" transparent opacity={0.7} side={THREE.BackSide} depthWrite={false} />
                         </mesh>
                     )}
-
 
                     <Membrane />
                     <Cytoplasm />
