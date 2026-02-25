@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="#0B0F1A"/>
+
+  <!-- Outer membrane (dashed ring) -->
+  <circle cx="32" cy="32" r="28" stroke="#00FFD1" stroke-width="1.5" stroke-dasharray="5 3" fill="rgba(0,255,209,0.06)"/>
+
+  <!-- Cytoplasm glow -->
+  <circle cx="32" cy="32" r="22" fill="rgba(0,180,150,0.07)"/>
+
+  <!-- Nucleus -->
+  <circle cx="32" cy="32" r="10" fill="rgba(106,90,205,0.7)" stroke="#B19CD9" stroke-width="1.2"/>
+  <!-- Nucleolus -->
+  <circle cx="32" cy="32" r="5" fill="rgba(177,156,217,0.5)"/>
+
+  <!-- Mitochondria (orange oval, rotated) -->
+  <ellipse cx="17" cy="22" rx="5" ry="3" fill="#FF6B35" transform="rotate(-30 17 22)"/>
+  <line x1="15" y1="21" x2="19" y2="21" stroke="#FF6B35" stroke-width="0.8" opacity="0.6" transform="rotate(-30 17 22)"/>
+
+  <!-- Golgi (yellow stacked lines) -->
+  <rect x="43" y="29" width="9" height="1.5" rx="1" fill="#F4C430" transform="rotate(10 47 32)"/>
+  <rect x="43" y="32" width="9" height="1.5" rx="1" fill="#F4C430" opacity="0.7" transform="rotate(10 47 32)"/>
+  <rect x="43" y="35" width="9" height="1.5" rx="1" fill="#F4C430" opacity="0.4" transform="rotate(10 47 32)"/>
+
+  <!-- Lysosome (dark red circle) -->
+  <circle cx="22" cy="46" r="4" fill="#8B0000" stroke="#cc2222" stroke-width="0.8"/>
+
+  <!-- Ribosome dots -->
+  <circle cx="42" cy="18" r="2" fill="#2E8B57"/>
+  <circle cx="46" cy="22" r="1.5" fill="#2E8B57" opacity="0.7"/>
+
+  <!-- Centrosome cross -->
+  <rect x="18" y="37" width="6" height="1.5" rx="0.75" fill="#A9A9A9"/>
+  <rect x="20.25" y="34.75" width="1.5" height="6" rx="0.75" fill="#A9A9A9"/>
+</svg>
