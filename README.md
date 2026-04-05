@@ -124,5 +124,3 @@ src/
 - Toda la información científica está basada en fuentes de biología celular estándar.
 
 ---
-
-*Hecho con curiosidad científica y demasiadas horas mirando mitocondrias en Three.js.*
