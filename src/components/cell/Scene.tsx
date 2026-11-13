@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
+import { useThree } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera, Environment } from '@react-three/drei'
-import { Suspense, useMemo } from 'react'
+import * as THREE from 'three'
 import { useStore } from '../../store/useStore'
 import { Lights } from './Lights'
 import { Membrane } from './Membrane'
@@ -13,71 +15,68 @@ import { Cytoskeleton } from './Cytoskeleton'
 import { Centrosome } from './Centrosome'
 import { VesiclesAndInclusions } from './Vesicles'
 import { CameraController } from './CameraController'
-import * as THREE from 'three'
+import { CellExtras, CellLabels } from './CellExtras'
+import { CellProcesses } from './CellProcesses'
+
+const ClippingController = () => {
+  const renderer = useThree(s => s.gl)
+  const enabled = useStore(s => s.cutEnabled)
+  const axis = useStore(s => s.cutAxis)
+  const depth = useStore(s => s.cutDepth)
+  useEffect(() => {
+    const normal = axis === 'x' ? new THREE.Vector3(-1,0,0)
+      : axis === 'y' ? new THREE.Vector3(0,-1,0)
+      : new THREE.Vector3(0,0,-1)
+    renderer.clippingPlanes = enabled ? [new THREE.Plane(normal, depth)] : []
+    renderer.localClippingEnabled = true
+    return () => { renderer.clippingPlanes = [] }
+  }, [renderer, enabled, axis, depth])
+  return null
+}
 
 export const Scene = () => {
-    const internalView = useStore((state) => state.internalView)
-    const selectedOrganelle = useStore((state) => state.selectedOrganelle)
+  const inside = useStore(s => s.internalView)
+  const cellType = useStore(s => s.cellType)
+  const mode = useStore(s => s.mode)
+  const quality = useStore(s => s.quality)
+  const visible = useStore(s => s.visibleOrganelles)
+  const channels = useStore(s => s.fluorescenceChannels)
+  const show = (id: string) => visible[id] !== false &&
+    (mode !== 'fluorescence' ||
+      (id === 'Nucleus' ? channels.nucleus :
+       id === 'Mitochondria' ? channels.mitochondria :
+       id === 'Membrane' ? channels.membrane : true))
 
-    // Empty raycast handler to ensure the dimming mesh doesn't block interactions
-    const noRaycast = useMemo(() => {
-        return () => null
-    }, [])
-
-    return (
-        <>
-            <PerspectiveCamera
-                makeDefault
-                position={[0, 0, 10]}
-                fov={internalView ? 75 : 45}
-            />
-            <OrbitControls
-                enablePan={true}
-                enableZoom={true}
-                minDistance={1}
-                maxDistance={25}
-                makeDefault
-                enableDamping={true}
-                dampingFactor={0.08}
-                rotateSpeed={1.8}
-                panSpeed={1.5}
-            />
-
-            <CameraController />
-            <Lights />
-
-            <Suspense fallback={null}>
-                <group>
-                    {/* Dimming overlay when something is selected */}
-                    {selectedOrganelle && (
-                        <mesh scale={[20, 20, 20]} raycast={noRaycast}>
-                            <sphereGeometry args={[1, 32, 32]} />
-                            <meshBasicMaterial color="black" transparent opacity={0.7} side={THREE.BackSide} depthWrite={false} />
-                        </mesh>
-                    )}
-
-                    <Membrane />
-                    <Cytoplasm />
-                    <Cytoskeleton />
-                    <Nucleus />
-
-                    <Mitochondria position={[2, 1, 2]} rotation={[0.5, 0.2, 0]} />
-                    <Mitochondria position={[-2, -1.5, 1]} rotation={[-0.3, 0.8, 0.5]} />
-                    <Mitochondria position={[0.5, 2, -1.5]} rotation={[1.1, 0, 0.2]} />
-
-                    <Golgi position={[-2, 1, -1]} rotation={[0, 1, 0.5]} />
-
-                    <Reticulum type="rugoso" position={[1.5, -0.5, -1.5]} rotation={[0, 0.5, 0.2]} />
-                    <Reticulum type="liso" position={[-1, 2, 1]} rotation={[0.5, -0.2, 0]} />
-
-                    <Centrosome position={[0, -1.8, 0.5]} />
-
-                    <Lysosomes count={6} area={4} />
-                    <Peroxisomes count={4} area={4} />
-                    <VesiclesAndInclusions />
-                </group>
-                <Environment preset="city" />
-            </Suspense>
-        </>
-    )
+  return <>
+    <PerspectiveCamera makeDefault position={[0,0,12.5]} fov={inside ? 78 : 45} near={0.05} far={150}/>
+    <OrbitControls makeDefault enablePan enableRotate enableZoom enableDamping dampingFactor={0.1}
+      minDistance={inside ? 0.15 : 0.6} maxDistance={32} rotateSpeed={0.7} panSpeed={0.65}
+      keyEvents />
+    <CameraController />
+    <ClippingController />
+    <Lights />
+    <group>
+      {show('Membrane') && <Membrane />}
+      {quality !== 'low' && show('Cytoplasm') && <Cytoplasm />}
+      {quality !== 'low' && show('Cytoskeleton') && <Cytoskeleton />}
+      {show('Nucleus') && <Nucleus />}
+      {show('Mitochondria') && <>
+        <Mitochondria position={[2,1,2]} rotation={[0.5,0.2,0]}/>
+        <Mitochondria position={[-2,-1.5,1]} rotation={[-0.3,0.8,0.5]}/>
+        <Mitochondria position={[0.5,2,-1.5]} rotation={[1.1,0,0.2]}/>
+        {cellType === 'hepatocyte' && <><Mitochondria position={[-2.5,2.6,-1.4]} rotation={[0.2,1,0]}/><Mitochondria position={[2,-2.1,-0.5]} rotation={[0.1,0.4,0.9]}/></>}
+      </>}
+      {show('Golgi') && <Golgi position={[-2,1,-1]} rotation={[0,1,0.5]}/>}
+      {show('Rough ER') && <Reticulum type="rugoso" position={[1.5,-0.5,-1.5]} rotation={[0,0.5,0.2]}/>}
+      {show('Smooth ER') && <><Reticulum type="liso" position={[-1,2,1]} rotation={[0.5,-0.2,0]}/>{cellType === 'hepatocyte' && <Reticulum type="liso" position={[2,-1.9,-1.3]} rotation={[0.2,0.4,0.6]}/>}</>}
+      {cellType !== 'plant' && show('Centrosome') && <Centrosome position={[0,-1.8,0.5]}/>}
+      {cellType !== 'plant' && show('Lysosome') && <Lysosomes count={quality==='low' ? 3 : 6} area={4}/>}
+      {show('Peroxisome') && <Peroxisomes count={quality==='low' ? 2 : 4} area={4}/>}
+      {show('Vesicle') && quality!=='low' && <VesiclesAndInclusions />}
+      <CellExtras />
+      <CellProcesses />
+    </group>
+    <CellLabels />
+    {quality !== 'low' && <Environment preset="city" />}
+  </>
 }

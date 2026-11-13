@@ -176,3 +176,117 @@ export const organelleData: Record<string, OrganelleDetail> = {
         comparison: 'El director de logística o jefe de obras.'
     }
 }
+
+/* Additional records ensure every selectable 3D structure has an accessible scientific card. */
+Object.assign(organelleData, {
+  Cytoskeleton: {
+    id: 'Cytoskeleton', name: 'Citoesqueleto',
+    whatIsIt: 'Red dinámica de filamentos que mantiene la forma celular y coordina movimientos.',
+    size: 'Filamentos de ~7, 10 y 25 nm',
+    colors: { main: '#75aaff' },
+    function: { primary: 'Sostén, transporte y movimiento', secondary: ['Movimiento celular', 'Transporte de vesículas', 'Huso mitótico'] },
+    structure: 'Microfilamentos de actina, filamentos intermedios y microtúbulos.',
+    curiosities: ['Se reorganiza continuamente según las necesidades de la célula.'],
+    clinicalImportance: 'Alteraciones del citoesqueleto afectan motilidad, división y resistencia celular.',
+    comparison: 'Una red de vías, andamios y cables que trabajan juntos.'
+  },
+  Vesicle: {
+    id: 'Vesicle', name: 'Vesícula de transporte',
+    whatIsIt: 'Compartimento membranoso que transporta materiales entre organelos o hacia la membrana.',
+    size: 'Variable, típicamente decenas a cientos de nm',
+    colors: { main: '#f7d976' },
+    function: { primary: 'Tráfico intracelular', secondary: ['Endocitosis', 'Exocitosis', 'Transporte entre compartimentos'] },
+    structure: 'Bicapa lipídica que rodea una carga acuosa o membranosa.',
+    curiosities: ['Pueden reconocer su destino mediante proteínas de transporte específicas.'],
+    clinicalImportance: 'Trastornos en el tráfico vesicular afectan secreción y reciclaje de receptores.',
+    comparison: 'Un paquete enviado entre estaciones de la célula.'
+  },
+  'Vacuola Pequeña': {
+    id: 'Vacuola Pequeña', name: 'Compartimento vacuolar',
+    whatIsIt: 'Espacio membranoso de almacenamiento o transporte; su tamaño y función varían entre células.',
+    size: 'Variable según el tipo celular',
+    colors: { main: '#a7e4ed' },
+    function: { primary: 'Almacenamiento y transporte', secondary: ['Equilibrio de sustancias', 'Tránsito intracelular'] },
+    structure: 'Una membrana delimita el contenido vacuolar.',
+    curiosities: ['Las vacuolas vegetales suelen ser mucho más grandes.'],
+    clinicalImportance: 'Cambios vacuolares pueden aparecer en distintos contextos de daño celular.',
+    comparison: 'Un depósito temporal.'
+  },
+  'Inclusión Lipídica': {
+    id: 'Inclusión Lipídica', name: 'Gota lipídica',
+    whatIsIt: 'Orgánulo de almacenamiento de lípidos neutros.',
+    size: 'Variable',
+    colors: { main: '#f9d55b' },
+    function: { primary: 'Reserva y metabolismo lipídico', secondary: ['Disponibilidad de energía', 'Homeostasis lipídica'] },
+    structure: 'Núcleo de lípidos neutros rodeado por monocapa fosfolipídica y proteínas.',
+    curiosities: ['No está rodeada por la bicapa típica de los compartimentos membranosos.'],
+    clinicalImportance: 'Su acumulación excesiva se relaciona con esteatosis celular.',
+    comparison: 'Una reserva energética regulada.'
+  },
+  'Gránulo de Glucógeno': {
+    id: 'Gránulo de Glucógeno', name: 'Gránulo de glucógeno',
+    whatIsIt: 'Agregado de glucógeno y proteínas que sirve como reserva de glucosa.',
+    size: 'Decenas de nm, en agregados variables',
+    colors: { main: '#e7c99f' },
+    function: { primary: 'Reserva energética', secondary: ['Movilización de glucosa', 'Metabolismo celular'] },
+    structure: 'Polímeros ramificados de glucosa asociados con enzimas reguladoras.',
+    curiosities: ['Es abundante en hígado y músculo, con funciones metabólicas distintas.'],
+    clinicalImportance: 'Las glucogenosis alteran el almacenamiento o uso del glucógeno.',
+    comparison: 'Un almacén de energía de acceso rápido.'
+  },
+  Chloroplast: {
+    id: 'Chloroplast', name: 'Cloroplasto',
+    whatIsIt: 'Orgánulo de las plantas y algas que realiza la fotosíntesis.',
+    size: 'Aproximadamente 3–10 µm',
+    colors: { main: '#67c77f' },
+    function: { primary: 'Fotosíntesis', secondary: ['Producción de compuestos orgánicos', 'Conversión de energía luminosa'] },
+    structure: 'Doble membrana, estroma y tilacoides organizados en grana.',
+    curiosities: ['Contiene un genoma propio.'],
+    clinicalImportance: 'Es específico de plantas y algas; se presenta aquí para comparación celular.',
+    comparison: 'Una planta de conversión de energía solar.'
+  },
+  'Cell Wall': {
+    id: 'Cell Wall', name: 'Pared celular',
+    whatIsIt: 'Capa externa rígida que sostiene y protege las células vegetales.',
+    size: 'Espesor variable',
+    colors: { main: '#a0d6a0' },
+    function: { primary: 'Soporte y protección', secondary: ['Resistencia mecánica', 'Definición de la forma celular'] },
+    structure: 'Red de microfibrillas de celulosa y otros polisacáridos.',
+    curiosities: ['Las células animales no tienen pared celular.'],
+    clinicalImportance: 'Estructura propia de plantas; importante en fisiología vegetal.',
+    comparison: 'La estructura de soporte de una construcción.'
+  },
+  'Central Vacuole': {
+    id: 'Central Vacuole', name: 'Vacuola central',
+    whatIsIt: 'Gran compartimento de las células vegetales que almacena solutos y contribuye a la turgencia.',
+    size: 'Puede ocupar gran parte del volumen celular',
+    colors: { main: '#8dcadf' },
+    function: { primary: 'Turgencia y almacenamiento', secondary: ['Homeostasis osmótica', 'Almacenamiento de pigmentos y solutos'] },
+    structure: 'Delimitada por una membrana llamada tonoplasto.',
+    curiosities: ['Puede ser el compartimento más voluminoso de una célula vegetal madura.'],
+    clinicalImportance: 'Se muestra como ejemplo de una adaptación celular vegetal.',
+    comparison: 'Un gran depósito que contribuye a sostener la célula.'
+  },
+  Axon: {
+    id: 'Axon', name: 'Axón',
+    whatIsIt: 'Prolongación especializada de las neuronas que conduce señales eléctricas.',
+    size: 'Longitud muy variable',
+    colors: { main: '#e0a6e9' },
+    function: { primary: 'Conducción de impulsos', secondary: ['Comunicación neuronal', 'Transporte axonal'] },
+    structure: 'Membrana excitable y citoesqueleto especializado.',
+    curiosities: ['Algunos axones se prolongan a grandes distancias del soma.'],
+    clinicalImportance: 'La lesión axonal puede afectar la transmisión nerviosa.',
+    comparison: 'Un cable de comunicación biológico.'
+  },
+  Myofibril: {
+    id: 'Myofibril', name: 'Miofibrilla',
+    whatIsIt: 'Estructura contráctil de las fibras musculares estriadas.',
+    size: 'Diámetro de alrededor de 1–2 µm',
+    colors: { main: '#d69cad' },
+    function: { primary: 'Contracción muscular', secondary: ['Organización de sarcómeros', 'Generación de fuerza'] },
+    structure: 'Sarcómeros repetidos que contienen filamentos de actina y miosina.',
+    curiosities: ['Su patrón de bandas explica la estriación muscular.'],
+    clinicalImportance: 'Alteraciones de proteínas del sarcómero provocan miopatías.',
+    comparison: 'Una secuencia de motores contráctiles microscópicos.'
+  }
+})
