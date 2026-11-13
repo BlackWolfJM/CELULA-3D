@@ -20,7 +20,7 @@ export const Experience = () => {
                 <Scene />
             </Suspense>
 
-            <EffectComposer disableNormalPass>
+            <EffectComposer enableNormalPass={false}>
                 <Bloom
                     intensity={mode === 'fluorescence' ? 1.5 : 0.5}
                     luminanceThreshold={1.0}
