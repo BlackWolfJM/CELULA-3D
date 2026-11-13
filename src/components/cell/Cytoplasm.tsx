@@ -49,7 +49,7 @@ export const Cytoplasm = () => {
                     opacity={0.3}
                     color="#CFEFFF"
                 />
-                {particles.map((p, i) => (
+                {particles.map((_, i) => (
                     <Point key={i} position={[0, 0, 0]} /> // Position is set via attributes in useFrame
                 ))}
             </Points>
