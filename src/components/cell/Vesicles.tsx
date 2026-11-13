@@ -49,7 +49,7 @@ const IndividualVesicle = ({ position, type }: { position: [number, number, numb
 
 export const VesiclesAndInclusions = () => {
     const items = useMemo(() => {
-        const temp = []
+        const temp: { id: string; type: 'vesicle' | 'vacuole' | 'lipid' | 'glycogen'; position: [number, number, number] }[] = []
         const types: ('vesicle' | 'vacuole' | 'lipid' | 'glycogen')[] = ['vesicle', 'vacuole', 'lipid', 'glycogen']
 
         types.forEach(type => {
