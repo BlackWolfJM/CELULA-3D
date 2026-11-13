@@ -50,7 +50,7 @@ export const Scene = () => {
     <PerspectiveCamera makeDefault position={[0,0,12.5]} fov={inside ? 78 : 45} near={0.05} far={150}/>
     <OrbitControls makeDefault enablePan enableRotate enableZoom enableDamping dampingFactor={0.1}
       minDistance={inside ? 0.15 : 0.6} maxDistance={32} rotateSpeed={0.7} panSpeed={0.65}
-      enableKeys />
+      />
     <CameraController />
     <ClippingController />
     <Lights />
