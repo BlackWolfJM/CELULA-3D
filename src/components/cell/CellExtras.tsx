@@ -133,7 +133,7 @@ export const CellLabels = () => {
     : [])]
   if (!enabled || internalView) return null
   return <group>
-    {labels.filter(item => visible[item.id] !== false && !(cellType==='plant' && item.id==='Membrane')).map(label =>
+    {labels.filter(item => visible[item.id] !== false).map(label =>
       <Html key={label.id} position={label.p} center style={{pointerEvents:'none'}} zIndexRange={[15,5]}>
         <div className={'cell-label' + (selected===label.id ? ' cell-label--selected' : '')}>
           <span className="cell-label-dot" />{label.title}

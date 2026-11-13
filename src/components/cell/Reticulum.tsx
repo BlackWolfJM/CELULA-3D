@@ -8,6 +8,7 @@ export const Reticulum = ({ type='rugoso', position=[0,0,0], rotation=[0,0,0] }:
   const groupRef = useRef<THREE.Group>(null)
   const select = useStore(s=>s.setSelectedOrganelle)
   const hover = useStore(s=>s.setHoveredOrganelle)
+  const stress = useStore(s=>s.condition === 'stress')
   const id = type === 'rugoso' ? 'Rough ER' : 'Smooth ER'
   const curves = useMemo(() => Array.from({length:type==='rugoso'?5:7},(_,i) => {
     const y = (i-2)*0.3
@@ -31,7 +32,7 @@ export const Reticulum = ({ type='rugoso', position=[0,0,0], rotation=[0,0,0] }:
       onPointerOut={()=>{hover(null);document.body.style.cursor='auto'}}>
       {curves.map((curve,i)=>
         <mesh key={i}><tubeGeometry args={[curve,56,type==='rugoso'?0.085:0.065,10,false]}/>
-          <meshStandardMaterial color={type==='rugoso'?'#397f8e':'#4ea29a'} roughness={0.53} metalness={0.12}/>
+          <meshStandardMaterial color={stress ? '#bb7c89' : type==='rugoso'?'#397f8e':'#4ea29a'} roughness={0.53} metalness={0.12}/>
         </mesh>
       )}
       {ribosomePositions.map((p,i)=>
