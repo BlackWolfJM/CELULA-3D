@@ -100,6 +100,7 @@ export const UI = () => {
   const profile=cellProfiles.find(p=>p.id===cellType) ?? cellProfiles[0]
   const ids=useMemo(()=>groups.flatMap(g=>g.ids).concat(extraGroups[cellType]).filter(id=>{
     const data=organelleData[id]
+    if (cellType==='plant' && (id==='Centrosome' || id==='Lysosome')) return false
     return data && (data.name.toLocaleLowerCase('es').includes(query.toLocaleLowerCase('es')) ||
       id.toLocaleLowerCase().includes(query.toLocaleLowerCase()))
   }),[query,cellType])
@@ -264,7 +265,7 @@ export const UI = () => {
         <h2>Capas y visibilidad</h2><p className="tool-desc">Aísla los componentes para inspeccionar la arquitectura celular.</p>
         <div className="tool-actions"><button onClick={()=>setAllVisible(true)}>Mostrar todo</button><button onClick={()=>setAllVisible(false)}>Ocultar todo</button></div>
         <label className="switch-row"><span>Etiquetas flotantes</span><input type="checkbox" checked={labelsVisible} onChange={e=>setLabelsVisible(e.target.checked)}/></label>
-        <div className="tool-list">{groups.flatMap(g=>g.ids).concat(extraGroups[cellType]).filter((id,i,a)=>a.indexOf(id)===i).map(id=><label key={id} className="switch-row">
+        <div className="tool-list">{groups.flatMap(g=>g.ids).concat(extraGroups[cellType]).filter((id,i,a)=>a.indexOf(id)===i && !(cellType==='plant' && (id==='Centrosome' || id==='Lysosome'))).map(id=><label key={id} className="switch-row">
           <span>{organelleData[id]?.name||id}</span><input type="checkbox" checked={visibleOrganelles[id]!==false} onChange={e=>setOrganelleVisible(id,e.target.checked)}/>
         </label>)}</div>
       </>}

@@ -69,8 +69,8 @@ export const Scene = () => {
       {show('Golgi') && <Golgi position={[-2,1,-1]} rotation={[0,1,0.5]}/>}
       {show('Rough ER') && <Reticulum type="rugoso" position={[1.5,-0.5,-1.5]} rotation={[0,0.5,0.2]}/>}
       {show('Smooth ER') && <><Reticulum type="liso" position={[-1,2,1]} rotation={[0.5,-0.2,0]}/>{cellType === 'hepatocyte' && <Reticulum type="liso" position={[2,-1.9,-1.3]} rotation={[0.2,0.4,0.6]}/>}</>}
-      {show('Centrosome') && <Centrosome position={[0,-1.8,0.5]}/>}
-      {show('Lysosome') && <Lysosomes count={quality==='low' ? 3 : 6} area={4}/>}
+      {cellType !== 'plant' && show('Centrosome') && <Centrosome position={[0,-1.8,0.5]}/>}
+      {cellType !== 'plant' && show('Lysosome') && <Lysosomes count={quality==='low' ? 3 : 6} area={4}/>}
       {show('Peroxisome') && <Peroxisomes count={quality==='low' ? 2 : 4} area={4}/>}
       {show('Vesicle') && quality!=='low' && <VesiclesAndInclusions />}
       <CellExtras />
