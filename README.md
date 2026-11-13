@@ -1,126 +1,62 @@
-# 🔬 Célula Animal 3D — Visualizador Científico Interactivo
+# CELULA-3D · Laboratorio celular interactivo
 
-Un proyecto personal que construí para explorar cómo llevar la biología celular al navegador usando tecnología 3D en tiempo real. La idea surgió de querer entender mejor cómo funciona una célula animal y, al mismo tiempo, practicar con React Three Fiber y Three.js.
+Explora, aprende y experimenta con un modelo didáctico de biología celular en 3D. Construido con React, TypeScript, Vite, Three.js y React Three Fiber.
 
-> Puedes hacer clic en cualquier orgánulo, ver información científica detallada, cambiar modos de visualización y explorar el interior de la célula — todo en el navegador, sin instalar nada.
+**Versión pública:** https://blackwolfjm.github.io/CELULA-3D/
 
----
+## Funcionalidades
 
-## ✨ Qué incluye
+- Interfaz científica renovada, adaptable a pantalla grande, tablet y móvil.
+- Explorador con búsqueda de orgánulos, fichas y diagramas vectoriales.
+- Visualización **Laboratorio / Microscopio / Fluorescencia** y canales de fluorescencia seleccionables.
+- Cámara con vistas predefinidas, zoom, enfoque de estructuras y entrada a la célula.
+- Capas de visibilidad, rótulos flotantes y cortes tridimensionales con tres orientaciones.
+- Cinco perfiles comparativos: célula animal, vegetal, neurona, hepatocito y célula muscular.
+- Tres simulaciones **conceptuales**: ruta de proteínas, producción de ATP y endocitosis.
+- Recorrido educativo por seis estructuras, evaluación de seis preguntas y dos niveles de fichas.
+- Comparación didáctica entre un estado de referencia y una visualización de estrés celular.
+- Captura PNG con rótulo científico, controles de calidad gráfica y enlace para compartir.
+- Biblioteca de referencias y avisos sobre límites del modelo.
 
-- **Orgánulos interactivos**: Membrana plasmática, Núcleo, Mitocondrias, Retículo Endoplasmático (rugoso y liso), Aparato de Golgi, Lisosomas, Peroxisomas, Centrosoma, Citoesqueleto y más.
-- **Panel de información científica**: Al hacer clic en cualquier parte de la célula se abre una ficha técnica con nombre científico, función biológica, estructura interna, importancia clínica, curiosidades y analogías.
-- **Diagramas moleculares vectoriales**: Cada orgánulo tiene su propio diagrama SVG científico generado en código.
-- **Modos de visualización**:
-  - 🧪 **Laboratorio** — vista oscura estándar
-  - 🔬 **Microscopio** — estilo microscopio óptico
-  - ⚡ **Fluorescencia** — colores de fluorescencia celular
-- **Micro-Exploración**: botón para entrar físicamente al interior de la célula y verla desde adentro.
-- **Animaciones biológicas**: rotación de orgánulos, partículas en el citoplasma, efecto de dimming al seleccionar.
+## Precisión científica
 
----
+**Atención:** el modelo es una *representación pedagógica no a escala*. Las posiciones, cantidades, movimientos y colores de los orgánulos son simplificaciones y no se deben interpretar como mediciones de una célula real. El estado de estrés celular es una visualización conceptual, no un diagnóstico ni la simulación de una enfermedad específica. Los modos de microscopía y fluorescencia **no** reproducen datos experimentales reales.
 
-## 🛠️ Tecnologías que usé
+Para revisar conceptos: [OpenStax Biology 2e](https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells) y [NCBI Bookshelf](https://www.ncbi.nlm.nih.gov/books/).
 
-| Tecnología | Uso |
-|---|---|
-| [React](https://react.dev) + [TypeScript](https://www.typescriptlang.org/) | Base de la aplicación |
-| [Vite](https://vitejs.dev/) | Bundler y servidor de desarrollo |
-| [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) | Renderizado 3D en React |
-| [Three.js](https://threejs.org/) | Motor 3D subyacente |
-| [@react-three/drei](https://github.com/pmndrs/drei) | Helpers (cámara, controles, efectos) |
-| [Zustand](https://github.com/pmndrs/zustand) | Estado global (orgánulo seleccionado, modo, etc.) |
-| [Lucide React](https://lucide.dev/) | Iconos del panel UI |
-| [Maath](https://github.com/pmndrs/maath) | Interpolación suave de cámara |
+## Desarrollo
 
----
-
-## 🚀 Instalación y ejecución
-
-### Requisitos previos
-- [Node.js](https://nodejs.org/) v18 o superior
-- npm (incluido con Node)
-
-### Pasos
+Requiere Node.js 22 o superior para reproducir el entorno de compilación.
 
 ```bash
-# 1. Clona el repositorio
-git clone https://github.com/tu-usuario/celulas-3d.git
-cd celulas-3d
-
-# 2. Instala las dependencias
-npm install
-
-# 3. Inicia el servidor de desarrollo
+git clone https://github.com/BlackWolfJM/CELULA-3D.git
+cd CELULA-3D
+npm ci
 npm run dev
 ```
 
-Luego abre tu navegador en **http://localhost:5173**
-
----
-
-## 📦 Compilar para producción
+La versión de producción se compila con:
 
 ```bash
 npm run build
-```
-
-Esto genera la carpeta `dist/` con los archivos estáticos listos para subir a cualquier hosting (Netlify, Vercel, GitHub Pages, etc.).
-
-Para pre-visualizar el build de producción localmente:
-
-```bash
 npm run preview
 ```
 
----
+El resultado está en `dist/`. El flujo `.github/workflows/deploy.yml` publica el sitio con GitHub Pages en cada actualización de `main`. Las propuestas se verifican con `.github/workflows/ci.yml`.
 
-## 📁 Estructura del proyecto
+## Organización
 
-```
-src/
-├── components/
-│   ├── cell/              # Orgánulos 3D (uno por archivo)
-│   │   ├── Scene.tsx      # Escena principal con todos los orgánulos
-│   │   ├── Nucleus.tsx
-│   │   ├── Mitochondria.tsx
-│   │   ├── Golgi.tsx
-│   │   ├── Reticulum.tsx
-│   │   ├── Lysosomes.tsx
-│   │   ├── Peroxisomes.tsx
-│   │   ├── Centrosome.tsx
-│   │   ├── Cytoskeleton.tsx
-│   │   ├── Cytoplasm.tsx
-│   │   ├── Membrane.tsx
-│   │   ├── Vesicles.tsx
-│   │   └── CameraController.tsx
-│   └── ui/
-│       ├── UI.tsx               # Interfaz completa (panel, controles, header)
-│       └── OrganelleDiagrams.tsx # Diagramas SVG científicos por orgánulo
-├── data/
-│   └── organelleData.ts   # Base de datos científica de orgánulos
-├── store/
-│   └── useStore.ts        # Estado global con Zustand
-└── index.css              # Estilos globales
-```
+- `src/components/cell/`: modelos y escenas WebGL.
+- `src/components/ui/UI.tsx`: interfaz, fichas y herramientas de exploración.
+- `src/components/ui/UI.css`: estilos y adaptación móvil.
+- `src/data/organelleData.ts`: información de estructuras celulares.
+- `src/data/learning.ts`: rutas, simulaciones, perfiles, preguntas y fuentes.
+- `src/store/useStore.ts`: estado compartido entre el 3D y los controles.
 
----
+## Controles
 
-## 🎮 Cómo usarlo
+Arrastra para rotar, usa el desplazamiento del ratón para hacer zoom y selecciona una estructura para enfocar su ficha. También puedes usar los botones de cámara. Pulsa **Esc** para cerrar una herramienta o la ficha. En móvil se admiten gestos táctiles en el canvas.
 
-1. **Rotar la célula**: Clic sostenido + arrastrar
-2. **Zoom**: Rueda del ratón
-3. **Seleccionar orgánulo**: Clic sobre cualquier parte de la célula
-4. **Cerrar panel**: Botón ✕ en la esquina superior del panel
-5. **Cambiar modo**: Iconos en la esquina superior derecha (Laboratorio / Microscopio / Fluorescencia)
-6. **Explorar interior**: Botón "Micro-Exploración" en la esquina inferior izquierda
+## Licencias y créditos
 
----
-
-## 📌 Notas
-
-- El proyecto está pensado para **navegadores de escritorio** con soporte WebGL (Chrome, Firefox, Edge modernos).
-- En móvil funciona, pero la experiencia es mejor en pantallas grandes.
-- Toda la información científica está basada en fuentes de biología celular estándar.
-
----
+Proyecto: **BlackWolfJM**. Tecnologías: React, Three.js, React Three Fiber, Drei, Zustand, Maath y Lucide.
